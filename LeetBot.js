@@ -7,11 +7,14 @@ const { BASE_URL, TOKEN } = process.env;
 const leetBot = new Client({ intents: ['GUILDS', 'GUILD_MESSAGES'] });
 
 leetBot.on('message', (message) => {
-  if (message.content === 'leet me') {
+  if (message.content === '!leetme') {
     axios.get(BASE_URL).then((response) => {
-      const responseLength = response.data.length;
-      const rand = Math.round(Math.random() * responseLength);
-      const { url } = response.data[rand];
+      const rand = Math.round(Math.random() * response.data.length);
+      const {
+        name, pattern, difficulty, companies, url,
+      } = response.data[rand];
+      const companyString = companies.join(', ');
+      message.channel.send(`Problem: ${name}\nPattern: ${pattern[0]}\nDifficulty: ${difficulty}\nUsed by the following companies: ${companyString}`);
       message.channel.send(url);
     }).catch((err) => {
       throw err;
