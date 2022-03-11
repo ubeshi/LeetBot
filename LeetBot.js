@@ -9,7 +9,7 @@ const leetBot = new Client({ intents: ['GUILDS', 'GUILD_MESSAGES'] });
 leetBot.on('message', (message) => {
   if (message.content === '!leetme') {
     axios.get(BASE_URL).then((response) => {
-      const rand = Math.round(Math.random() * response.data.length);
+      const rand = Math.floor(Math.random() * response.data.length);
       const {
         name, pattern, difficulty, companies, url,
       } = response.data[rand];
