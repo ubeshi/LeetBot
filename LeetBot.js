@@ -14,7 +14,8 @@ leetBot.on('message', (message) => {
         name, pattern, difficulty, companies, url,
       } = response.data[rand];
       const companyString = companies.join(', ');
-      message.channel.send(`Problem: ${name}\nPattern: ${pattern[0]}\nDifficulty: ${difficulty}\nUsed by the following companies: ${companyString}\n${url}`);
+      message.channel.send(`Problem: ${name}\nPattern: ${pattern[0]}\nDifficulty: ${difficulty}\nUsed by the following companies: ${companyString}`);
+      message.channel.send(url);
     }).catch((err) => {
       throw err;
     });
